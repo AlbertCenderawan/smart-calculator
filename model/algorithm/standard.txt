@@ -1,0 +1,43 @@
+// ALGORITMA STANDARD CALCULATOR
+
+STANDARD CALCULATOR
+- Addition
+- Subtract
+- Multiple
+- Division
+- Power of
+- Per cent
+- Memory +
+
+CARA KERJA
+T1. Operand -> T2
+T2. Masukkan operator
+    a. "=" -> T4
+    b. "+", "-", "x", ":" -> lanjut T4
+    c. "1/x" -> T3
+T3. Hasil sementara
+    a. "=" -> T4
+T4. Operand -> B
+    a. Cara kerja = T1
+T5. Masukkan operator
+    a. "=" -> T6
+    b. "+", "-", "x", ":" -> lanjut T3
+    c. "1/x" -> T5
+T6. Hasil sementara -> T6
+T7. Hasil akhir -> A operator B
+
+HIRARKI
+()
+➗ ✖
+➖ ➕
+
+KEPANJANGAN DARI
+1. CE = Clear Entry
+Menghapus angka terakhir yang diketik pada layar.
+2. C = Clear
+Menghapus angka pada layar dan beberapa perhitungan sebelumnya.
+3. MC = Memory Clear
+menghapus angka yang tersimpan dalam memori. Tombol ini memiliki fungsi untuk menghapus angka yang disimpan dalam memori kalkulator. Dengan kata lain, M- dan MC akan me-reset memori ke kondisi 0.
+4. AC = All Clear
+menghapus semua hasil perhitungan yang ada di layar, juga me-reset semua fungsi yang sudah dimasukkan.
+    Namun tombol AC tidak akan menghapus hitungan yang sudah disimpan dalam memori kalkulator.
