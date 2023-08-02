@@ -8,11 +8,9 @@
     <?php include "../bootstrap/css.php" ?>
 </head>
 <body>
-    <!-- Name, menu -->
-    <div>
-        <h1 id="title">Smart Calculator</h1>
-    </div>
     <?php include '../php/menu.php' ?>
+    <!-- HEADINGS -->
+    <div id="title" class="title"><h1 id="title-h1"> Smart Calculator </h1></div>
     
     <!-- Opening section -->
     <div style="text-align: center">
@@ -54,15 +52,6 @@
             <dd>Gram, Kilogram, Metric Ton, Ounce, Pound</dd>
         </dl>
     </div>
-
-    <!-- Quote -->
-    <!-- <div style="text-align: center; background-color:yellow">
-        <p><strong><em>Stay hungry, stay foolish!</em></strong></p>
-        <p>Steve Jobs (Apple Company Founder).</p>
-    </div> -->
-
-    <!-- Component -->
-    <!-- <img src="../../public/icons/idea.png" alt="Idea" style="width: 10%" title="light bulb"> -->
 
     <script src="http://localhost/smart-calculator/resources/js/page/page.js"></script>
     <script src="http://localhost/smart-calculator/resources/js/index.js"></script>

@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link rel="stylesheet" href="../../css/page/about.css">
-    <?php include "../../bootstrap/css.php" ?>
+    <link rel="stylesheet" href="../css/page/about.css">
+    <?php require_once "../../public/bootstrap/css.php"; ?>
 </head>
 <body>
-    <!-- Title -->
-    <div>
-        <h1 id="title">About Us</h1>
-    </div>
-    <?php include '../../php/menu.php' ?>
+    <?php include '../component/menu.php' ?>
+
+    <!-- TITLE -->
+    <div id="title" class="title"><h1 id="title-h1"></h1></div>
     
     <!-- Paragraph -->
     <div>
@@ -24,8 +23,8 @@
     <!-- Footer -->
     <div>
         <a href="../index.php" title="Logo of Smart Calculator">
-            <img src="../../../public/icons/calculator.png" alt="Calculator" width="10%">
-            <img src="../../../public/icons/idea.png" alt="" width="10%">
+            <img src="../../public/icons/calculator.png" alt="Calculator" width="10%">
+            <img src="../../public/icons/idea.png" alt="" width="10%">
         </a>
     </div><br>
     <div>
@@ -50,7 +49,6 @@
         </table>
     </div>
 
-    <script src="../../js/page/about.js"></script>
-    <?php include "../../bootstrap/js.php" ?>
+    <?php require_once "../../public/bootstrap/css.php"; ?>
 </body>
 </html>

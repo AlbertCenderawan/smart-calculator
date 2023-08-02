@@ -1,4 +1,4 @@
-const stack = {'operator':[],'operand':[],'infix':"",'temp':"",'postfix':[], 'postfix_operand':[]};
+const stack = {'operator':[],'operand':[],'infix':[],'temp':"",'postfix':[], 'postfix_operand':[]};
 const operator = [
     ['+', '-'],
     ['x', '*', '/', '÷'],
@@ -21,6 +21,23 @@ const IsOperator = (element) => {
 
 const Object_IsEmpty = (object) => {return Object.keys(object).length == 0}
 
+// CALCULATE NOW!
+export const Calculate = (object, resultObject) => {
+
+    for (let char = 0; char < object.innerText.length; char++){
+
+        console.log(object.innerText[char]);
+        AddToStack(object.innerText[char]);
+
+        // Infix
+        stack.infix.push(object.innerText[char]);
+    }
+    
+    DoArithmetic();
+    
+    console.log(stack);
+}
+
 // CHECK ALL CHARACTERS, WHETHER IS OPERAND OR NOT.
 const AddToStack = (input) => {
     
@@ -31,7 +48,7 @@ const AddToStack = (input) => {
         return;
     }
 
-    // -5 + -2
+    // -5 + -2 (STILL OPERAND)
     if (input == "-" && stack.temp.length == 0){
         stack.temp = stack.temp.concat(input); return;
     }
@@ -41,7 +58,7 @@ const AddToStack = (input) => {
         'input':0,
     };
 
-    // CONNECT OPERATOR WITH HIERARCHY
+    // IF THIS IS OPERATOR? LET'S SEE
     for (let i = 0; i < operator.length; i++){
         for (let j = 0; j < operator[i].length; j++){
             if (input === operator[i][j] && input !== "="){
@@ -55,11 +72,13 @@ const AddToStack = (input) => {
 
                 hierarchy['input'] = i;
 
+                // IF THIS IS FIRST (1st) OPERATOR
                 if (Object_IsEmpty(stack.operator)){
                     hierarchy['topOperator'] = i;
                     stack.operator.push(input); break;
                 }
 
+                // IF THIS IS OTHER (2nd, 3rd, 4th, ...) OPERATOR
                 while (stack.operator.length > 0 && (hierarchy['topOperator'] >= hierarchy['input'])){
                     stack.postfix.push(stack.operator[stack.operator.length - 1]);
                     stack.operator.pop();
@@ -70,13 +89,17 @@ const AddToStack = (input) => {
         }
     }
 
+    // IF OPERATOR == EQUAL
     if (input === "="){
+
+        // CHECK TEMP. IF THERE'S A REMAIN, PUSH!
         if (stack.temp != ""){
             stack.postfix.push(stack.temp);
             stack.operand.push(stack.temp);
             stack.temp = "";
         }
 
+        // CHECK OPERATOR STACK. IF THERE'S STILL A BIT, PUSH!
         while (stack.operator.length > 0){
             stack.postfix.push(stack.operator[stack.operator.length - 1]);
             stack.operator.pop();
@@ -84,27 +107,12 @@ const AddToStack = (input) => {
     }
 }
 
-export const Calculate = (object, resultObject) => {
-
-    for (let char = 0; char < object.innerText.length; char++){
-
-        AddToStack(object.innerText[char]);
-
-        // Infix
-        stack.infix = stack.infix.concat(object.innerText[char]);
-    }
+const DoArithmetic = () => {
+    // https://youtu.be/UKuIw8cKKsc
     
-    for (let index = 0; index < stack.postfix.length; index++){
-        let e = stack.postfix[index];
-
-        // IF OPERAND
-        if (!IsOperator(e)){
-            stack.postfix_operand.push(e); continue;
-        }
-
-        // IF OPERATOR
-        const 
+    // LET'S DO ARITHMETIC (WITH POSTFIXES)
+    for (let element = 0; element < stack.postfix.length; element++){
+        
+        // IF FOUND OPERATOR, PLEASE CHECK 2 OPERAND BEHIND.
     }
-    
-    console.log(stack);
 }

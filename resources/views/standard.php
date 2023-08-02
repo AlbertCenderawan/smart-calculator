@@ -4,30 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link rel="stylesheet" href="../../css/page/standard.css">
-    <?php include "../../bootstrap/css.php" ?>
+    <link rel="stylesheet" href="../css/page/standard.css">
+    <?php include "../bootstrap/css.php" ?>
 </head>
 <body>
-    <!-- Title -->
-    <div>
-        <h1 id="title">Standard</h1>
-    </div>
-    <?php include '../../php/menu.php' ?>
-    
-    <!-- Inspired by -->
-    <div>
-        <p>Contoh website kalkulator:
-            <a href="https://www.calculator.net/" target="_blank">Calculator.net</a>
-        </p>
-    </div>
+    <?php include '../php/menu.php' ?>
+
+    <!-- TITLE -->
+    <div id="title" class="title"><h1 id="title-h1"></h1></div>
     
     <!-- Layout -->
-    <table class="table-bordered">
+    <table class="">
         <thead>
             <script>
                 const results = {
-                    'calculation':0,
-                    'result':0,
+                    'calculation':'0',
+                    'result':'0',
                 }; class_results = "output";
 
                 Object.keys(results).forEach(id=>{
@@ -120,9 +112,9 @@
         </tbody>
     </table>
 
-    <script src="../../js/page/page.js"></script>
-    <script src="../../js/page/standard.js" type="module"></script>
-    <script type="module" src="../../js/math/operation.js"></script>
-    <?php include "../../bootstrap/js.php" ?>
+    <script src="../js/page/page.js"></script>
+    <script src="../js/page/standard.js" type="module"></script>
+    <script type="module" src="../js/math/operation.js"></script>
+    <?php include "../bootstrap/js.php" ?>
 </body>
 </html>
