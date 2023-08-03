@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <link rel="stylesheet" href="../css/index.css">
-    <?php include "../bootstrap/css.php" ?>
+    <link id="bootstrap-css"></link>
 </head>
 <body>
-    <?php include '../php/menu.php' ?>
+    <?php include '../component/menu.php' ?>
+    
     <!-- HEADINGS -->
     <div id="title" class="title"><h1 id="title-h1"> Smart Calculator </h1></div>
     
@@ -52,9 +53,34 @@
             <dd>Gram, Kilogram, Metric Ton, Ounce, Pound</dd>
         </dl>
     </div>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
 
-    <script src="http://localhost/smart-calculator/resources/js/page/page.js"></script>
-    <script src="http://localhost/smart-calculator/resources/js/index.js"></script>
-    <?php include "../bootstrap/js.php" ?>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="../js/page.js"></script>
+    <script class="bootstrap-js"></script>
+    <script class="bootstrap-js"></script>
+    <script class="bootstrap-js"></script>
+    <script type="module" src="../../public/bootstrap/config.js"></script>
 </body>
 </html>
