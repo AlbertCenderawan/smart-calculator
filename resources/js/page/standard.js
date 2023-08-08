@@ -1,5 +1,4 @@
-import { ResetToZero, BackSpace, Includes, IsMinus, Percent, Power, Inverse, SquareRoot, CubeRoot, PlusMinus, AddNumber, AddNumberByKey, PutOperator, AddDoubleZero, AddComma } from "../math/calculator.js";
-import { Calculate } from "../math/operation.js";
+import { ResetToZero, BackSpace, Includes, IsMinus, Percent, Power, Inverse, SquareRoot, CubeRoot, PlusMinus, AddNumber, AddNumberByKey, PutOperator, AddDoubleZero, AddComma, PutAnswerInto } from "../math/calculator.js";
 
 // CALCULATION => RESULT
 const calculation = document.getElementById('calculation');
@@ -88,9 +87,9 @@ document.addEventListener('keydown', e=>{if (e.keyCode == 191) PutOperator(calcu
 // EQUAL
 const equal = document.getElementById('equal');
 equal.addEventListener('click', ()=>{
-    PutOperator(calculation, equal); Calculate(calculation,result)});
+    PutOperator(calculation, equal); PutAnswerInto(result, calculation)});
 document.addEventListener('keydown', e=>{
     if (e.key == "=") {
-        PutOperator(calculation, equal); Calculate(calculation, result);
+        PutOperator(calculation, equal); PutAnswerInto(result, calculation);
     }
 });

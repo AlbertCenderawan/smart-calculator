@@ -1,3 +1,5 @@
+import { Calculate } from "./operation.js";
+
 export const AddNumber = (object, numObject) => {
     if (parseInt(object.innerText) == "0") object.innerText = numObject.innerText;
     else object.innerText += numObject.innerText;
@@ -79,4 +81,8 @@ export const IsComma = (object) => {
 
 export const IsInteger = (object) => {
     return Number.isInteger(parseInt(object.innerText));
+}
+
+export const PutAnswerInto = (object, questionObject) => {
+    object.innerText = Calculate(questionObject);
 }

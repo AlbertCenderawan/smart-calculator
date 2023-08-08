@@ -21,15 +21,10 @@
         });}
 </script>
 
-<script>
+<script type="module">
+    import {features} from "../js/page.js";
+
     const webLink = "http://localhost/smart-calculator/resources/views/";
-    const features = [
-        {'name' : "smart-calculator", 'link' : "index.php"},
-        {'name' : "About",'link' : "about.php"},
-        {'name' : "Standard",'link' : "standard.php"},
-        {'name' : "Scientific",'link' : "scientific.php"},
-        {'name' : "Converter",'link' : "converter.php"},
-    ];
 
     // GET EACH ELEMENT.
     const navbarBrandAnchor = document.getElementById("navbar-brand-anchor");

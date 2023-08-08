@@ -1,15 +1,40 @@
-const stack = {'operator':[],'operand':[],'infix':[],'temp':"",'postfix':[], 'postfix_operand':[]};
+// ARRAY AS STACK.
+const stack = {
+    'operator' : [],
+    'operand' : [],
+    'infix' : [],
+    'temp' : "",
+    'postfix' : [],
+    'list_of' : {
+        'operand' : [],
+        'operator' : [],
+    },
+    'temp_operand' : []
+};
+
+// OPERATOR & ITS "HIERARCHY"
 const operator = [
-    ['+', '-'],
+    ['+','-'],
     ['x', '*', '/', '÷'],
     ['=']
-]
+];
 
-// operator = {key=i : value=input}
+// BINARY OPERATOR & ITS "OPERATIONS"
+const operations = {
+    '+': function (o1, o2) {return o1 + o2},
+    '-': function (o1, o2) {return o1 - o2},
+    'x': function (o1, o2) {return o1 * o2},
+    '*': function (o1, o2) {return o1 * o2},
+    '/': function (o1, o2) {return o1 / o2},
+    '÷': function (o1, o2) {return o1 / o2}
+};
 
+// IF COMMA, IF INTEGER, IF EMPTY
 const IsComma = (char) => {return char === "." || char === ",";}
 const IsInteger = (char) => {return Number.isInteger(parseInt(char));}
-const IsFloat = (element) => {return parseFloat(element) !== NaN;}
+const IsEmpty = (object) => {return Object.keys(object).length == 0}
+
+// IF THE OPERATOR IS IN THE LIST, RETURN TRUE.
 const IsOperator = (element) => {
     for (let i = 0; i < operator.length; i++){
         for (let j = 0; j < operator[i].length; j++){
@@ -17,25 +42,25 @@ const IsOperator = (element) => {
         }
     }
     return false;
-}
-
-const Object_IsEmpty = (object) => {return Object.keys(object).length == 0}
+};
 
 // CALCULATE NOW!
-export const Calculate = (object, resultObject) => {
+export const Calculate = (object) => {
 
     for (let char = 0; char < object.innerText.length; char++){
-
-        console.log(object.innerText[char]);
         AddToStack(object.innerText[char]);
-
-        // Infix
-        stack.infix.push(object.innerText[char]);
     }
     
-    DoArithmetic();
+    return ConvertStackIntoOperation();
+}
+
+// ADD INPUT TO OTHER STACKS
+const AddToOtherStacks = (type, input) => {
     
-    console.log(stack);
+    if (type == "operand") stack.list_of.operand.push(input);
+    else if (type == "operator") stack.list_of.operator.push(input);
+
+    stack.infix.push(input);
 }
 
 // CHECK ALL CHARACTERS, WHETHER IS OPERAND OR NOT.
@@ -50,7 +75,8 @@ const AddToStack = (input) => {
 
     // -5 + -2 (STILL OPERAND)
     if (input == "-" && stack.temp.length == 0){
-        stack.temp = stack.temp.concat(input); return;
+        stack.temp = stack.temp.concat(input);
+        return;
     }
 
     const hierarchy = {
@@ -66,16 +92,20 @@ const AddToStack = (input) => {
                 // Temp = "5.3" => ""
                 if (stack.temp.length > 0){
                     stack.postfix.push(stack.temp);
-                    stack.operand.push(stack.temp);
+
+                    AddToOtherStacks(stack.temp);
                     stack.temp = "";
                 }
 
+                // SET HIERARCHY
                 hierarchy['input'] = i;
+                AddToOtherStacks(stack.temp);
 
                 // IF THIS IS FIRST (1st) OPERATOR
-                if (Object_IsEmpty(stack.operator)){
+                if (IsEmpty(stack.operator)){
                     hierarchy['topOperator'] = i;
-                    stack.operator.push(input); break;
+                    stack.operator.push(input);
+                    break;
                 }
 
                 // IF THIS IS OTHER (2nd, 3rd, 4th, ...) OPERATOR
@@ -91,11 +121,12 @@ const AddToStack = (input) => {
 
     // IF OPERATOR == EQUAL
     if (input === "="){
+        stack.infix.push(input);
 
-        // CHECK TEMP. IF THERE'S A REMAIN, PUSH!
+        // CHECK TEMP. IF THERE'S A REMAIN OPERAND, PUSH!
         if (stack.temp != ""){
             stack.postfix.push(stack.temp);
-            stack.operand.push(stack.temp);
+            stack.list_of.operand.push(stack.temp);
             stack.temp = "";
         }
 
@@ -107,12 +138,35 @@ const AddToStack = (input) => {
     }
 }
 
-const DoArithmetic = () => {
-    // https://youtu.be/UKuIw8cKKsc
+// APPLY MATH METHODS TO PRODUCE RESULT.
+const ApplyMath = (operand_01, operator, operand_02) => {
     
-    // LET'S DO ARITHMETIC (WITH POSTFIXES)
-    for (let element = 0; element < stack.postfix.length; element++){
-        
-        // IF FOUND OPERATOR, PLEASE CHECK 2 OPERAND BEHIND.
-    }
+    let result = 0;
+    Object.keys(operations).forEach(key => {
+        if (key === operator)
+            result = operations[key](parseFloat(operand_01), parseFloat(operand_02));
+    });
+
+    return result;
 }
+
+// CONVERT POSTFIX STACK TO "ARITHMETIC" EXPRESSION EVALUATION
+const ConvertStackIntoOperation = () => {
+
+    for (let i = 0; i < stack.postfix.length; i++)
+    {
+        // IF THIS IS OPERAND?
+        if (!IsOperator(stack.postfix[i])){
+            stack.temp_operand.push(stack.postfix[i]);
+            continue;
+        }
+
+        // IF THIS IS OPERATOR, DO ARITHMETIC PROCESS!
+        let operand_end = stack.temp_operand.pop();
+        let operand_begin = stack.temp_operand.pop();
+        stack.temp_operand.push(ApplyMath(operand_begin, stack.postfix[i], operand_end));
+    }
+
+    // BECAUSE TEMP_OPERAND HAS ONLY 1 VALUE (= RESULT), POP IT!
+    return stack.temp_operand.pop();
+};
