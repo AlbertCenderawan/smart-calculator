@@ -14,17 +14,9 @@
     <!-- Layout -->
     <table class="">
         <thead>
-            <script>
-                const results = {
-                    'calculation':'0',
-                    'result':'0',
-                }; class_results = "output";
+            <tr id="tr-results">
 
-                Object.keys(results).forEach(id=>{
-                    document.write(
-                        "<tr><th class="+class_results+" id="+id+" colspan="+12+">"+results[id]+"</th></tr>"
-                    );});
-            </script>
+            </tr>
         </thead>
         <tbody>
             <tr>
@@ -110,6 +102,7 @@
         </tbody>
     </table>
 
+    <script type="module" src="../component/calculator.js"></script>
     <script type="module" src="../js/page/standard.js"></script>
     <script type="module" src="../js/page.js"></script>
     <script type="module" src="../../public/bootstrap/config.js"></script>
